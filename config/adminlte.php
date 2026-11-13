@@ -54,10 +54,10 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image opacity-75 shadow',
-    'logo_img_alt' => 'AdminLTE Logo',
+    'logo' => '<span class="brand-text fw-bold" style="color: #0f172a; font-family: Montserrat, sans-serif; font-size: 1.15rem; letter-spacing: -0.5px;">Aqua<span style="color: #2563eb;">Tank</span></span>',
+    'logo_img' => 'photos/Aquatank logo.png',
+    'logo_img_class' => 'brand-image',
+    'logo_img_alt' => 'AquaTank Logo',
 
     /*
     |--------------------------------------------------------------------------
@@ -110,7 +110,7 @@ return [
     'layout_fixed_sidebar' => true,   // .layout-fixed
     'layout_fixed_navbar' => true,    // .fixed-header
     'layout_fixed_footer' => null,    // .fixed-footer
-    'layout_dark_mode' => null,       // null = respect system / user toggle
+    'layout_dark_mode' => false,      // false = force clean light mode
     'layout_rtl' => false,            // Enable right-to-left layout
 
     /*
@@ -124,26 +124,26 @@ return [
     |
     */
 
-    'footer_left' => 'Copyright &copy; 2014-'.date('Y').' <a href="https://adminlte.io" class="text-decoration-none">AdminLTE.io</a>. All rights reserved.',
-    'footer_right' => 'Anything you want',
+    'footer_left' => '&copy; '.date('Y').' <strong>AquaTank 2.0</strong> &bull; Water Billing & Consumer Records Management System.',
+    'footer_right' => '<span class="badge bg-primary-subtle text-primary border border-primary-subtle px-2 py-1">Barangay Caruhayon</span>',
     'preloader' => false,
     'control_sidebar' => false,
-    'control_sidebar_theme' => 'dark',
+    'control_sidebar_theme' => 'light',
 
     // Documentation URL used by the navbar "Documentation" link and the sidebar
     // "View documentation" CTA (false to hide the CTA). Defaults to the in-app
     // docs viewer served at /docs (see the `docs` keys below).
-    'sidebar_docs_url' => '/docs',
+    'sidebar_docs_url' => false,
 
     // Bundled demo/showcase pages (Dashboard v2/v3, Widgets, UI, Forms, Tables,
     // Layout Options, Theme Generate, auth variants, error pages). Set false to
     // skip registering their routes in production.
-    'demo' => true,
+    'demo' => false,
     'demo_middleware' => ['web', 'auth'],
 
     // In-app documentation viewer: renders this package's docs/*.md files at
     // /docs and /docs/{page}. Set 'docs' => false to disable the route.
-    'docs' => true,
+    'docs' => false,
     'docs_middleware' => ['web'],
 
     'sidebar_breakpoint' => 'lg',     // sidebar-expand-{breakpoint}
@@ -172,9 +172,9 @@ return [
     |
     */
 
-    'sidebar_theme' => 'dark',  // 'dark' | 'light'
+    'sidebar_theme' => 'light',  // 'dark' | 'light'
 
-    'primary_color' => null,    // brand colour: links, .btn-primary, --bs-primary
+    'primary_color' => '#2563eb',    // brand colour: links, .btn-primary, --bs-primary
     'sidebar_color' => null,    // .app-sidebar background
     'navbar_color' => null,     // .app-header background
     'footer_color' => null,     // .app-footer background
@@ -185,15 +185,15 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'classes_body' => '',
+    'classes_body' => 'bg-light text-dark',
     'classes_brand' => '',
-    'classes_brand_text' => 'fw-light',
+    'classes_brand_text' => 'fw-bold',
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'bg-body-secondary shadow',
+    'classes_sidebar' => 'shadow-sm',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-expand bg-body',
+    'classes_topnav' => 'navbar-expand bg-white border-bottom shadow-xs',
     'classes_topnav_nav' => 'navbar',
     'classes_topnav_container' => 'container-fluid',
 
@@ -206,7 +206,7 @@ return [
     |
     */
 
-    'color_mode_toggle' => true,
+    'color_mode_toggle' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -246,83 +246,81 @@ return [
             'icon' => 'bi bi-speedometer2',
         ],
 
-
         /*
         |--------------------------------------------------------------------------
-        | CONSUMERS
+        | WATER BILLING OPERATIONS
         |--------------------------------------------------------------------------
         */
 
-        ['header' => 'WATER BILLING'],
+        ['header' => 'OPERATIONS'],
 
         [
             'text' => 'Consumers',
             'icon' => 'bi bi-people-fill',
-
             'submenu' => [
-
                 [
                     'text' => 'All Consumers',
                     'url' => 'consumers',
                     'icon' => 'bi bi-circle',
                 ],
-
                 [
                     'text' => 'Add Consumer',
                     'url' => 'consumers/create',
                     'icon' => 'bi bi-circle',
                 ],
-
             ],
         ],
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | BILLING
-        |--------------------------------------------------------------------------
-        */
 
         [
-            'text' => 'Billing',
-            'icon' => 'bi bi-receipt',
-
+            'text' => 'Meter Reading',
+            'icon' => 'bi bi-speedometer2',
             'submenu' => [
-
                 [
-                    'text' => 'Bills',
-                    'url' => 'billing',
+                    'text' => 'Record Meter Reading',
+                    'url' => 'meter-readings/create',
                     'icon' => 'bi bi-circle',
                 ],
-
                 [
-                    'text' => 'Create Bill',
-                    'url' => 'billing/create',
+                    'text' => 'Reading History',
+                    'url' => 'meter-readings',
                     'icon' => 'bi bi-circle',
                 ],
-
             ],
         ],
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | PAYMENTS
-        |--------------------------------------------------------------------------
-        */
+        [
+            'text' => 'Billing & Invoices',
+            'icon' => 'bi bi-receipt-cutoff',
+            'submenu' => [
+                [
+                    'text' => 'All Bills',
+                    'url' => 'bills',
+                    'icon' => 'bi bi-circle',
+                ],
+                [
+                    'text' => 'Generate Water Bill',
+                    'url' => 'bills/create',
+                    'icon' => 'bi bi-circle',
+                ],
+            ],
+        ],
 
         [
             'text' => 'Payments',
-            'url' => 'payments',
             'icon' => 'bi bi-cash-stack',
+            'submenu' => [
+                [
+                    'text' => 'Payment Records',
+                    'url' => 'payments',
+                    'icon' => 'bi bi-circle',
+                ],
+                [
+                    'text' => 'Record OTC Payment',
+                    'url' => 'payments/create',
+                    'icon' => 'bi bi-circle',
+                ],
+            ],
         ],
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | SMS
-        |--------------------------------------------------------------------------
-        */
 
         [
             'text' => 'SMS Notifications',
@@ -330,46 +328,21 @@ return [
             'icon' => 'bi bi-chat-dots-fill',
         ],
 
-
-        /*
-        |--------------------------------------------------------------------------
-        | REPORTS
-        |--------------------------------------------------------------------------
-        */
-
-        ['header' => 'REPORTS'],
-
         [
-            'text' => 'Reports',
+            'text' => 'Operational Reports',
             'url' => 'reports',
-            'icon' => 'bi bi-file-earmark-bar-graph',
-        ],
-
-        [
-            'text' => 'Analytics',
-            'url' => 'analytics',
-            'icon' => 'bi bi-bar-chart-line-fill',
+            'icon' => 'bi bi-file-earmark-bar-graph-fill',
         ],
 
 
-        /*
-        |--------------------------------------------------------------------------
-        | SYSTEM
-        |--------------------------------------------------------------------------
-        */
-
-        ['header' => 'SYSTEM'],
+        // public access
+        ['header' => 'PUBLIC ACCESS'],
 
         [
-            'text' => 'Users',
-            'url' => 'users',
-            'icon' => 'bi bi-person-gear',
-        ],
-
-        [
-            'text' => 'Settings',
-            'url' => 'settings',
-            'icon' => 'bi bi-gear-fill',
+            'text' => 'My Water Bill (Public)',
+            'url' => 'my-water-bill',
+            'icon' => 'bi bi-box-arrow-up-right',
+            'target' => '_blank',
         ],
     ],
 

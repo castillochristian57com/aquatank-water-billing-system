@@ -17,11 +17,12 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('middle_name')->nullable();
             $table->string('last_name');
-            $table->string('contact_number');
-            $table->string('purok');
             $table->string('address');
+            $table->string('contact_number');
+            $table->string('purok')->nullable();
             $table->string('meter_number')->unique();
-            $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            $table->date('connection_date')->nullable();
+            $table->string('status')->default('active'); // 'active', 'inactive'
             $table->timestamps();
         });
     }

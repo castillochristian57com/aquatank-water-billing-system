@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    'sms' => [
+        'provider' => env('SMS_GATEWAY_PROVIDER', 'semaphore'),
+        'api_key' => env('SMS_API_KEY'),
+        'sender_name' => env('SMS_SENDER_NAME', 'AQUATANK'),
+        'simulation_mode' => env('SMS_SIMULATION_MODE', true),
+        'custom_endpoint' => env('SMS_CUSTOM_ENDPOINT'),
+    ],
+
 ];
